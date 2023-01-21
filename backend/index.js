@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import cors from "cors";
+import PersonaRoutes from "./routes/PersonaRouter";
 
 const app  = express();
 
@@ -18,7 +19,6 @@ mongoose.connect(stringConnection)
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
-
 app.use(cors())
 
 const port = 3000;
@@ -26,5 +26,5 @@ const port = 3000;
 app.get("/",(req,res) => {
     res.send("Servidor Backend");   
 })
-
+app.use("/api/personas",PersonaRoutes);
 app.listen(port,()=>console.log(`Servidor backend escuchando en el puerto: ${port}`))

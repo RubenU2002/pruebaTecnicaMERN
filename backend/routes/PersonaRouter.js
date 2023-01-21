@@ -51,5 +51,6 @@ PersonaRoutes.put("/update",async(req,res)=>{
     }else{
         res.status(404).send("No se encontró a la persona adjunta a ese ID");
     }
-
 })
+
+export default PersonaRoutes;
