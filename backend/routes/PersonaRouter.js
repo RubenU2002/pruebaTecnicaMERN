@@ -1,10 +1,11 @@
 import express from "express";
-import persona from "../models/Persona";
+import persona from "../models/Persona.js";
 
 const PersonaRoutes = express.Router();
 
 PersonaRoutes.get("/",async(req,res)=>{
-    const personas = persona.find({});
+    const personas = await persona.find({});
+    console.log(personas);
     res.send(personas);
 })
 PersonaRoutes.get("/reset",async(req,res) =>{

@@ -2,7 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import cors from "cors";
-import PersonaRoutes from "./routes/PersonaRouter";
+import PersonaRoutes from "./routes/PersonaRouter.js";
 
 const app  = express();
 
