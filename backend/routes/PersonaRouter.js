@@ -39,3 +39,17 @@ PersonaRoutes.get("/delete/:idPersona",async(req,res)=>{
         res.status(404).send("La persona adjunta al id no existe")
     }
 })
+
+PersonaRoutes.put("/update",async(req,res)=>{
+    const {idPersona,nombreCompleto,edad,fechaNacimiento,fechaInscripcion,costo} = req.body;
+
+    const filtrador = {idPersona:idPersona};
+    const actualizador = {nombreCompleto,edad,fechaNacimiento,fechaInscripcion,costo};
+    const personaToUpdate = await persona.findOne({idPersona:idPersona});
+    if(personaToUpdate){
+        const personaUpdated = await persona.findOneAndUpdate(filtrador,actualizador);
+    }else{
+        res.status(404).send("No se encontró a la persona adjunta a ese ID");
+    }
+
+})
