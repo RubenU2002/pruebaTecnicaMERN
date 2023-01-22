@@ -15,7 +15,7 @@ PersonaRoutes.post("/create",async(req,res)=>{
     const idPersona = req.body.idPersona;
     const nombreCompleto = req.body.nombreCompleto;
     const edad = req.body.edad;
-    const fechaNacimiento = req.body.fechaNacimiento;
+    const fechaNacimiento = req.body.fechaNacimiento;   
     const fechaInscripcion = req.body.fechaInscripcion;
     const costo = req.body.costo;
 

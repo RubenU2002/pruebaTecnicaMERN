@@ -9,7 +9,8 @@ const AgregarPersona = ()=>{
     const [fechaNacimiento,setFechaNacimiento] = useState("");
     const [fechaInscripcion,setFechaInscripcion] = useState("");
     const [costo,setCosto] = useState(0);
-    const [fallo,setFallo] = useState(0);
+
+    const [fallo,setFallo] = useState(null);
     const calcularEdad=(fecha)=>{
         let hoy = new Date();
         let cumple = new Date(fecha);
@@ -60,18 +61,19 @@ const AgregarPersona = ()=>{
         if(calcularCosto(costo,fechaInscripcion.toString(),fechaNacimiento.toString())==false){
             alert("El costo dado no coincide con los parametros de la empresa");
             setFallo(1);
+            console.log(fallo)
         }
         if(validarNombre(nombreCompleto)==true){
             alert("Tu nombre debe tener dos palabras minimo");
             setFallo(1);
         }
         console.log(fallo);
-        if(fallo==0){
-            const {data} = await axios.post("http://localhost:3000/api/personas/create",{idPersona:idPersona,nombreCompleto:nombreCompleto,edad:edad,fechaNacimiento:fechaNacimiento.toString(),costo:costo});
+        if(fallo==null){
+            const {data} = await axios.post("http://localhost:3000/api/personas/create",{idPersona:idPersona,nombreCompleto:nombreCompleto,edad:edad,fechaNacimiento:fechaNacimiento.toString(),fechaInscripcion:fechaInscripcion,costo:costo});
             console.log("registrado",{data});
             alert("Registro exitoso");
         }
-        setFallo(0);
+        setFallo(null);
     }
 
 
