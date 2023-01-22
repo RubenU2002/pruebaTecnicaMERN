@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import axios from "axios";
 const ActualizarPersona = ()=>{
     const navigate = useNavigate();
     const [idPersona,setIdPersona] = useState("");
@@ -58,7 +59,7 @@ const ActualizarPersona = ()=>{
             alert("La fecha de inscripcion es menor a la de nacimiento")
             fallos=1;
         }
-        if(calcularCosto(costo,fechaInscripcion.toString())==costo){
+        if(calcularCosto(costo,fechaInscripcion.toString())!=costo){
             alert("El costo dado no coincide con los parametros de la empresa");
             fallos=1;
             console.log(fallo)
@@ -67,7 +68,6 @@ const ActualizarPersona = ()=>{
             alert("Tu nombre debe tener dos palabras minimo");
             fallos=1;
         }
-        console.log(fallo);
         if(fallos==0){
             const {data} = await axios.put("http://localhost:3000/api/personas/update",{idPersona:idPersona,nombreCompleto:nombreCompleto,edad:edad,fechaNacimiento:fechaNacimiento.toString(),fechaInscripcion:fechaInscripcion,costo:costo});
             console.log("Actualizacion",{data});

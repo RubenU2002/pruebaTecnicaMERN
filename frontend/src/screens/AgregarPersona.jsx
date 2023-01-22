@@ -31,6 +31,7 @@ const AgregarPersona = ()=>{
         if(mes<0 || (mes === 0 && hoy.getDate()<inscrip.getDate())){
             anos--;
         }
+        console.log(anos)
         return anos*100;
     }
 
@@ -59,7 +60,7 @@ const AgregarPersona = ()=>{
             alert("La fecha de inscripcion es menor a la de nacimiento")
             fallos=1;
         }
-        if(calcularCosto(costo,fechaInscripcion.toString())==costo){
+        if(calcularCosto(costo,fechaInscripcion.toString())!=costo){
             alert("El costo dado no coincide con los parametros de la empresa");
             fallos=1;
             console.log(fallo)
