@@ -6,7 +6,7 @@ const EliminarPersona = ()=>{
     const [idPersona,setIdPersona]= useState("");
     const navigate = useNavigate();
     const handleSubmit =async (e)=>{
-        e.prevenDefault();
+        e.preventDefault();
         try{
             const {data} = await axios.get(`http://localhost:3000/api/personas/delete/${idPersona}`);
             if(data.deletedCount>0){
@@ -23,6 +23,7 @@ const EliminarPersona = ()=>{
         <form onSubmit={handleSubmit}>
             <label htmlFor="idPersona">Id de la persona</label>
                 <input type="text" name = "idPersona" id="idPersona" onChange={(e)=>setIdPersona(e.target.value)}  required/>
+                <button>Eliminar persona</button>
         </form>
         <button onClick={()=>navigate("/")}>Volver atras</button>
         </>
