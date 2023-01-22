@@ -6,6 +6,7 @@ import HomeSc from './screens/HomeSc'
 import AgregarPersona from './screens/AgregarPersona'
 import EliminarPersona from './screens/EliminarPersona'
 import VerPersonas from './screens/VerPersonas'
+import ActualizarPersona from './screens/ActualizarPersona'
 
 function App() {
 
@@ -15,8 +16,9 @@ function App() {
         <Routes>
           <Route path='/' element={<HomeSc/>}/>
           <Route path='/agregarPersona' element={<AgregarPersona/>}/>
-          <Route path='/EliminarPersona' element={<EliminarPersona/>}/>
+          <Route path='/eliminarPersona' element={<EliminarPersona/>}/>
           <Route path='/verPersonas' element={<VerPersonas/>}/>
+          <Route path='/actualizarPersona' element={<ActualizarPersona/>}/>
         </Routes>
       </BrowserRouter>
     </div>

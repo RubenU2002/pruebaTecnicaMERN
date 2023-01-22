@@ -22,16 +22,16 @@ const AgregarPersona = ()=>{
         }
         return edadCal;
     }
-    const calcularCosto =(costoDato,fechaInscrip,fechaNac)=>{
+    const calcularCosto =(costoDato,fechaInscrip)=>{
+        let hoy = new Date();
         let inscrip = new Date(fechaInscrip);
-        let nac = new Date(fechaNac);
-        let anos = inscrip.getFullYear()-nac.getFullYear();
+        let anos = hoy.getFullYear()-inscrip.getFullYear();
 
-        let mes = inscrip.getMonth()-nac.getMonth();
-        if(mes<0 || (mes === 0 && inscrip.getDate()<nac.getDate())){
+        let mes = hoy.getMonth()-inscrip.getMonth();
+        if(mes<0 || (mes === 0 && hoy.getDate()<inscrip.getDate())){
             anos--;
         }
-        return costoDato==anos*100;
+        return anos*100;
     }
 
     const validarNombre = (nombre)=>{
@@ -46,29 +46,30 @@ const AgregarPersona = ()=>{
 
     const handleSubmitFormulario = async(e)=>{
         e.preventDefault();
+        const fallos = 0;
         if(calcularEdad(fechaNacimiento.toString())<18){
             alert("La edad es menor de 18 años")
-            setFallo(1);
+            fallos=1;
         }
         if(calcularEdad(fechaNacimiento.toString())!=edad){
             alert("La edad no coincide con la fecha de nacimiento");
-            setFallo(1);
+            fallos=1;
         }
         if(Date.parse(fechaInscripcion.toString())<Date.parse(fechaNacimiento.toString())){
             alert("La fecha de inscripcion es menor a la de nacimiento")
-            setFallo(1);
+            fallos=1;
         }
-        if(calcularCosto(costo,fechaInscripcion.toString(),fechaNacimiento.toString())==false){
+        if(calcularCosto(costo,fechaInscripcion.toString())==costo){
             alert("El costo dado no coincide con los parametros de la empresa");
-            setFallo(1);
+            fallos=1;
             console.log(fallo)
         }
         if(validarNombre(nombreCompleto)==true){
             alert("Tu nombre debe tener dos palabras minimo");
-            setFallo(1);
+            fallos=1;
         }
         console.log(fallo);
-        if(fallo==null){
+        if(fallos==0){
             const {data} = await axios.post("http://localhost:3000/api/personas/create",{idPersona:idPersona,nombreCompleto:nombreCompleto,edad:edad,fechaNacimiento:fechaNacimiento.toString(),fechaInscripcion:fechaInscripcion,costo:costo});
             console.log("registrado",{data});
             alert("Registro exitoso");
